@@ -42,12 +42,12 @@ class QuestionRepository implements repositoryInterface
         ]);
         $questionsDatas = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        $questions = [];
-        foreach($questionsDatas as $questionData) {
-            $questions[] = new Question($questionData, $this->getDb() );
-        }
+        // $questions = [];
+        // foreach($questionsDatas as $questionData) {
+        //     $questions[] = new Question($questionData, $this->getDb() );
+        // }
 
-        return $questions;
+        return $questionsDatas;
     }
 }
 

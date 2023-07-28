@@ -5,14 +5,12 @@ class Qcm
     private int $id_qcm;
 
     private array $questions;
-    private QuestionRepository $questionRepo;
 
 
-    public function __construct(array $datas, PDO $bdd)
+    public function __construct(array $datas, array $questions)
     {
         $this->hydrate($datas);
-        $this->setQuestionRepo($bdd);
-        $this->setQuestions($this->getQuestionRepo()->findAllById($this->getId_qcm()));
+        $this->setQuestions($questions);
     }
 
 
@@ -32,26 +30,6 @@ class Qcm
     public function setId_qcm($id_qcm)
     {
         $this->id_qcm = $id_qcm;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of questionRepo
-     */
-    public function getQuestionRepo()
-    {
-        return $this->questionRepo;
-    }
-
-    /**
-     * Set the value of questionRepo
-     *
-     * @return  self
-     */
-    public function setQuestionRepo(PDO $bdd)
-    {
-        $this->questionRepo = new QuestionRepository($bdd);
 
         return $this;
     }

@@ -7,13 +7,11 @@ class Question
     private string $question;
 
     private array $answers;
-    private AnswerRepository $answerRepo;
 
-    public function __construct(array $datas, PDO $bdd)
+    public function __construct(array $datas, array $answers)
     {
         $this->hydrate($datas);
-        $this->setAnswerRepo($bdd);
-        $this->setAnswers($this->answerRepo->findAllById($this->getId_question()));
+        $this->setAnswers($answers);
     }
 
     /**
@@ -52,26 +50,6 @@ class Question
     public function setQuestion($question)
     {
         $this->question = $question;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of answerRepo
-     */ 
-    public function getAnswerRepo()
-    {
-        return $this->answerRepo;
-    }
-
-    /**
-     * Set the value of answerRepo
-     *
-     * @return  self
-     */ 
-    public function setAnswerRepo(PDO $bdd)
-    {
-        $this->answerRepo = new AnswerRepository($bdd);
 
         return $this;
     }

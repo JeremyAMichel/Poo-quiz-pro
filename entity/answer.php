@@ -6,6 +6,7 @@ class Answer
     private int $id_answers;
     private string $answer;
     private bool $isCorrect;
+    
     public function __construct(array $datas)
     {
         $this->hydrate($datas);
@@ -74,8 +75,8 @@ class Answer
 
     public function hydrate(array $datas)
     {
-        if (isset($datas["id_answers"])) {
-            $this->setId_Answer($datas["id_answers"]);
+        if (isset($datas["id_answer"])) {
+            $this->setId_Answer($datas["id_answer"]);
         }
 
         if (isset($datas["answer"])) {

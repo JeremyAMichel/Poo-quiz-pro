@@ -40,8 +40,8 @@ class QcmRepository implements repositoryInterface
         ]);
         $qcmData = $result->fetch(PDO::FETCH_ASSOC);
 
-        $qcm = new Qcm($qcmData, $this->getDb());
-        return $qcm;
+        // $qcm = new Qcm($qcmData, $this->getDb());
+        return $qcmData;
 
     }
 

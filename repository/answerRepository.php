@@ -39,12 +39,12 @@ class AnswerRepository implements repositoryInterface
             ':id_question' => $id_question,
         ]);
         $answersDatas = $result->fetchAll(PDO::FETCH_ASSOC);
-        $answers = [];
+        // $answers = [];
      
-        foreach($answersDatas as $answerData) {            
-            $answers[] = new Answer($answerData);
-        }
+        // foreach($answersDatas as $answerData) {            
+        //     $answers[] = new Answer($answerData);
+        // }
 
-        return $answers;
+        return $answersDatas;
     }
 }
