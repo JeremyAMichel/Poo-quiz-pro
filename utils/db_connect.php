@@ -1,5 +1,5 @@
 <?php
-$dns = "mysql:host=localhost;dbname=tp_quizz_poo";
+$dns = "mysql:host=localhost;dbname=quiz_poo";
 $user = "root";
 $password = "";
 

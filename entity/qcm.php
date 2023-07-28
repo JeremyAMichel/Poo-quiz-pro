@@ -12,7 +12,7 @@ class Qcm
     {
         $this->hydrate($datas);
         $this->setQuestionRepo($bdd);
-        $this->setQuestions($this->getQuestionRepo()->findAllQuestionByQcmId($this->id_qcm));
+        $this->setQuestions($this->getQuestionRepo()->findAllById($this->getId_qcm()));
     }
 
 
@@ -81,6 +81,21 @@ class Qcm
     {
         if (isset($datas["id_qcm"])) {
             $this->setId_qcm($datas["id_qcm"]);
+        }
+    }
+
+    public function generate()
+    {
+        foreach($this->getQuestions() as $question){
+            echo $question->getQuestion();
+            echo '<br><br>';
+
+            foreach($question->getAnswers() as $answer){
+                echo '- ' . $answer->getAnswer();
+                echo '<br>';
+            }
+
+            echo '<br><br>';
         }
     }
 }

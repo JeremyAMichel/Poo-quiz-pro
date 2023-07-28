@@ -1,6 +1,7 @@
 <?php
 
-class QuestionRepository {
+class QuestionRepository implements repositoryInterface
+{
 
     private PDO $db; // Instance de PDO
 
@@ -9,30 +10,7 @@ class QuestionRepository {
         $this->setDb($db);
     }
 
-
-    public function findAllQuestionByQcmId (int $id_qcm) {
-        $query = 'SELECT * FROM `questions` INNER JOIN id_qcm_question ON questions.id_question = id_qcm_question.id_question WHERE id_qcm = ?';
-        $result = $this->db->prepare($query);
-        $result->execute([$id_qcm]);
-        $questionsDatas = $result->fetchAll(PDO::FETCH_ASSOC);
-        $questions = [];
-
-        // var_dump($questionsDatas);   
-
-        foreach($questionsDatas as $questionData) {
-            $questions[] = new Question($questionData, $this->getDb() );
-        }
-
-        return $questions;
-    }
-
-
-
-
-
-
-
-
+    
     public function getDb(): PDO
     {
         return $this->db;
@@ -48,6 +26,28 @@ class QuestionRepository {
         $this->db = $db;
 
         return $this;
+    }
+
+
+    /**
+     * Find all the questions related to a Qcm (using his id)
+     * 
+     * @return array of Question
+     */
+    public function findAllById (int $id_qcm) {
+        $query = 'SELECT * FROM `questions` INNER JOIN qcms_questions ON questions.id_question = qcms_questions.id_question WHERE id_qcm = ?';
+        $result = $this->db->prepare($query);
+        $result->execute([
+            $id_qcm
+        ]);
+        $questionsDatas = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        $questions = [];
+        foreach($questionsDatas as $questionData) {
+            $questions[] = new Question($questionData, $this->getDb() );
+        }
+
+        return $questions;
     }
 }
 

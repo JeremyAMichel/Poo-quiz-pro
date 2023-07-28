@@ -13,7 +13,7 @@ class Question
     {
         $this->hydrate($datas);
         $this->setAnswerRepo($bdd);
-        $this->setAnswers($this->answerRepo->findAllAnswersByIdQuestion($datas['id_question']));
+        $this->setAnswers($this->answerRepo->findAllById($this->getId_question()));
     }
 
     /**
@@ -102,8 +102,8 @@ class Question
             $this->setId_question($datas["id_question"]);
         }
 
-        if (isset($datas["question"])) {
-            $this->setQuestion($datas["question"]);
+        if (isset($datas["intitulé"])) {
+            $this->setQuestion($datas["intitulé"]);
         }
     }
 }
